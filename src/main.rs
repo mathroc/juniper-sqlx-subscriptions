@@ -44,12 +44,13 @@ impl Subscription {
     ) -> StringStream {
         let mut interval = tokio::time::interval(std::time::Duration::from_secs(1));
 
+        let db = executor.context().db.clone();
         let stream = async_stream::stream! {
             loop {
                 interval.tick().await;
 
                 yield sqlx::query_scalar("select 'tic'")
-                    .fetch_one(&executor.context().db).await
+                    .fetch_one(&db).await
                     .map_err(|err: sqlx::Error| err.into());
 
                 yield Ok("tac".into())
