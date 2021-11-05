@@ -1,5 +1,11 @@
 Trying to use a sqlx database pool inside a juniper GraphQL subscription resolver
 
+---
+
+Note: the solution has been found : https://github.com/mathroc/juniper-sqlx-subscriptions/pull/2
+
+---
+
 The issue:
 
 ```
